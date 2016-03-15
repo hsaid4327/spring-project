@@ -1,39 +1,17 @@
-# IDEA files
-*.ipr
-*.iws
-*.iml
-
-# Eclipse files
-.classpath
-.project
-.settings/
-
-# Build directory
-build/
-target/
-
-# Bin directory
-bin/
-
-# OS X files
-.DS_Store
-
-#Emacs files
-*~
-\#*\#
-
-#Log4j properties
-log4j.properties
-log4j.xml
-
-#Winmerge bak
-*\.bak
-
-#Configuration files
-*.properties
-
-#Java classes
+/target/*
+/workspace
+/spring/*
+spring/*
 *.class
+*.jar
+*.project
+*.classpath
+*.settings
 
-war/
-.gwt/
+
+#Eclipse, NetBeans and ItelliJ files
+/.*
+!.gitignore
+/*.ipr
+/*.iws
+/*.iml

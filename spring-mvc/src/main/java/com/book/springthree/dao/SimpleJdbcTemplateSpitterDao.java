@@ -3,6 +3,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 
@@ -23,6 +25,13 @@ public class SimpleJdbcTemplateSpitterDao implements
 
   private static final String SQL_SELECT_SPITTER_BY_ID = SQL_SELECT_SPITTER
           + " where id=?";
+  
+  private static final String SQL_SELECT_SPITTER_BY_USERNAME = SQL_SELECT_SPITTER
+          + " where username=?";
+  
+
+  private static final String SQL_SELECT_SPLITTER = "Select "
+          + "id, spittleText, postedTime from spittle where spitter_id = ?";
 
   //<start id="java_addSpitter_vars" /> 
   private SimpleJdbcTemplate jdbcTemplate;
@@ -73,8 +82,12 @@ public class SimpleJdbcTemplateSpitterDao implements
   }
   
   public List<Spittle> getRecentSpittle() {
-    // TODO Auto-generated method stub
-    return null;
+	  String sql = "SELECT * FROM spittle";
+		
+			List<Spittle> spittles  = jdbcTemplate.query(sql,
+					new BeanPropertyRowMapper(Spittle.class));
+				
+			return spittles;
   }
   
   public void saveSpittle(Spittle spittle) {
@@ -91,14 +104,31 @@ public class SimpleJdbcTemplateSpitterDao implements
 
   public List<Spittle> getSpittlesForSpitter(
           Spitter spitter) {
-    // TODO Auto-generated method stub
-    return null;
+	  String sql = "SELECT * FROM spittle where spitter_id = "+ spitter.getId();
+		
+			List<Spittle> spittles  = jdbcTemplate.query(sql,
+					new BeanPropertyRowMapper<Spittle>(Spittle.class));
+				
+			return spittles;
   }
   
 
   public Spitter getSpitterByUsername(String username) {
-    // TODO Auto-generated method stub
-    return null;
+	   return jdbcTemplate.queryForObject(//<co id="co_query"/>
+	            SQL_SELECT_SPITTER_BY_USERNAME,
+	        new ParameterizedRowMapper<Spitter>() {
+	          public Spitter mapRow(ResultSet rs, int rowNum) 
+	              throws SQLException {
+	            Spitter spitter = new Spitter();//<co id="co_map"/>
+	            spitter.setId(rs.getLong(1));
+	            spitter.setUsername(rs.getString(2));
+	            spitter.setPassword(rs.getString(3));
+	            spitter.setFullName(rs.getString(4));
+	            return spitter;
+	          }
+	        }, 
+	        username //<co id="co_bind"/>
+	        );
   }
 
   public void deleteSpittle(long id) {

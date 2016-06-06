@@ -3,8 +3,7 @@
 <div>
 <h2>Create a free Spitter account</h2>
 
-<sf:form method="POST" modelAttribute="spitter" 
-         enctype="multipart/form-data">         
+<sf:form method="POST" modelAttribute="spitter">         
    <fieldset> 
    <table cellspacing="0">
       <tr>
@@ -38,12 +37,7 @@
              <sf:errors path="email" cssClass="error" />
             </td>
       </tr>
-      <!--<start id="image_field"/>--> 
-      <tr>
-        <th><label for="image">Profile image:</label></th>
-        <td><input name="image" type="file"/>
-      </tr>
-      <!--<end id="image_field"/>--> 
+    
       <tr>
          <th></th>
          <td>

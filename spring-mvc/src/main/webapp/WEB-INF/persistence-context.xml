@@ -14,7 +14,7 @@
   
   <!--<start id="bean.spitterDao" />--> 
   <bean id="spitterDao" 
-      class="com.habuma.spitter.persistence.SimpleJdbcTemplateSpitterDao">
+      class="com.book.springthree.dao.SimpleJdbcTemplateSpitterDao">
     <property name="jdbcTemplate" ref="jdbcTemplate" />
   </bean>
   <!--<end id="bean.spitterDao" />-->
